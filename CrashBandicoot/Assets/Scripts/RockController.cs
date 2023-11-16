@@ -10,7 +10,8 @@ public class RockController : MonoBehaviour
 	}
 
 	private void OnCollisionEnter(Collision other) {
-		if (other.gameObject.name == "Cube(Clone)") {
+		if (other.gameObject.name == "box_low(Clone)") {
+			// GetComponent<ParticleSystem>().Play();
 			Destroy(other.gameObject);
 		}
 		if (other.gameObject.tag == "Player") {

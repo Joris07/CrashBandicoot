@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60e28ed05938d3459f2f82a122fbfa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cube: {fileID: 5779926432323604501, guid: 98f381bb9fe6db74694fad4595b642d0, type: 3}
+  cube: {fileID: 0}
   maxCube: 5
   maxHeight: 3
 --- !u!1 &943332208786589109
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60e28ed05938d3459f2f82a122fbfa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cube: {fileID: 5779926432323604501, guid: 98f381bb9fe6db74694fad4595b642d0, type: 3}
+  cube: {fileID: 8032926682005648466, guid: 79cd82e91b47bf945923fc34f3635b91, type: 3}
   maxCube: 5
   maxHeight: 3
 --- !u!1 &5026061340085130818
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60e28ed05938d3459f2f82a122fbfa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cube: {fileID: 5779926432323604501, guid: 98f381bb9fe6db74694fad4595b642d0, type: 3}
+  cube: {fileID: 0}
   maxCube: 5
   maxHeight: 3
 --- !u!1001 &80883499447424645
