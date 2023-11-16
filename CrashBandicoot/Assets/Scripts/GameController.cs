@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
 
 	public void OnDeath () {
 		panelDeath.SetActive(true);
-		timeAliveText.text = "You were alive for "+ Math.Round(timeAlive, 1) + " seconds";
+		timeAliveText.text = "Tu as tenu "+ Math.Round(timeAlive, 1) + " secondes";
 		Time.timeScale = .5f;
 	}
 }
