@@ -40,18 +40,18 @@ public class ObstacleGenerator : MonoBehaviour
 	}
 
 	public void OnDespawn() {
-		//TODO: pourquoi pas faire du pooling aussi comme pour le placement des terrains afin d'éviter de faire spawn despawn des trucs tout le temps
-		int i = 0;
+		// //TODO: pourquoi pas faire du pooling aussi comme pour le placement des terrains afin d'éviter de faire spawn despawn des trucs tout le temps
+		// int i = 0;
 
-		//Array to hold all child obj
-		GameObject[] allChildren = new GameObject[transform.childCount];
+		// //Array to hold all child obj
+		// GameObject[] allChildren = new GameObject[transform.childCount];
 
-		//Find all child obj and store to that array
-		foreach (Transform child in transform)
-		{
-			allChildren[i] = child.gameObject;
-			i += 1;
-		}
+		// //Find all child obj and store to that array
+		// foreach (Transform child in transform)
+		// {
+		// 	allChildren[i] = child.gameObject;
+		// 	i += 1;
+		// }
 
 		// //Now destroy them
 		// foreach (GameObject child in allChildren)
