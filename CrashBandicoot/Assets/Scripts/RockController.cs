@@ -14,7 +14,7 @@ public class RockController : MonoBehaviour
 		if (other.gameObject.name == "box_low(Clone)") {
 			audioSource.Play();
 			// GetComponent<ParticleSystem>().Play();
-			other.gameObject.GetComponent<ParticleSystem>().Play();
+			//other.gameObject.GetComponent<ParticleSystem>().Play();
 			other.gameObject.GetComponent<MeshRenderer>().enabled = false;	
 			Destroy(other.gameObject, 1);
 		}
