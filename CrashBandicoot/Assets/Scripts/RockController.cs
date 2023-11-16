@@ -6,7 +6,7 @@ public class RockController : MonoBehaviour
 	public GameController gameController;
 
 	private void Update() {
-		transform.Translate(Vector3.back * speed * Time.deltaTime);
+		transform.Translate(Vector3.up * speed * Time.deltaTime);
 	}
 
 	private void OnCollisionEnter(Collision other) {
