@@ -10,7 +10,11 @@ public class RockController : MonoBehaviour
 	}
 
 	private void OnCollisionEnter(Collision other) {
+		if (other.gameObject.name == "Cube(Clone)") {
+			Destroy(other.gameObject);
+		}
 		if (other.gameObject.tag == "Player") {
+			Destroy(other.gameObject);
 			gameController.OnDeath();
 		}
 	}
