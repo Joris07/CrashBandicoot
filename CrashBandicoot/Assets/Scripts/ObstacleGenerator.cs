@@ -53,11 +53,11 @@ public class ObstacleGenerator : MonoBehaviour
 			i += 1;
 		}
 
-		//Now destroy them
-		foreach (GameObject child in allChildren)
-		{
-			DestroyImmediate(child.gameObject);
-		}
+		// //Now destroy them
+		// foreach (GameObject child in allChildren)
+		// {
+		// 	DestroyImmediate(child.gameObject);
+		// }
 
 }
 }
