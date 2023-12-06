@@ -19,6 +19,7 @@ public class CrashController : MonoBehaviour
     private Animator anim;
 
     private float lastTimeGrounded;
+    private bool isRotating;
 
     // Start is called before the first frame update
     private void Start()
@@ -74,6 +75,7 @@ public class CrashController : MonoBehaviour
         }
         else
         {
+            //Invoke("DisableRotation", 2f);
             anim.ResetTrigger("Attack");
         }
 
@@ -109,10 +111,27 @@ public class CrashController : MonoBehaviour
 
     private IEnumerator Attack()
     {
+        isRotating = true;
         anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 1);
         anim.SetTrigger("Attack");
 
         yield return new WaitForSeconds(0.9f);
         anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
+        isRotating = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "box_low(Clone)" && isRotating)
+        {
+            other.gameObject.GetComponent<Collider>().enabled = false;
+            other.gameObject.GetComponent<ParticleSystem>().Play();
+            other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            Destroy(other.gameObject, 1);
+        }
+    }
+    private void DisableRotation()
+    {
+        isRotating = false;
     }
 }
