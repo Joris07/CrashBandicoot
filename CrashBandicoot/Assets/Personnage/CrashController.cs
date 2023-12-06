@@ -18,7 +18,6 @@ public class CrashController : MonoBehaviour
     private CharacterController controller;
     private Animator anim;
 
-    private bool isRunning;
     private float lastTimeGrounded;
 
     // Start is called before the first frame update
@@ -53,9 +52,6 @@ public class CrashController : MonoBehaviour
             // Calculer la rotation pour faire face à la direction du déplacement
             Quaternion toRotation = Quaternion.LookRotation(inputDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * 8f);
-
-            // Vérifier si le personnage court pour ajuster l'animation
-            isRunning = Input.GetKey(KeyCode.LeftShift);
         }
 
         // Utiliser la direction avant du transform pour le déplacement
@@ -63,7 +59,7 @@ public class CrashController : MonoBehaviour
 
         if (moveDirection != Vector3.zero)
         {
-            moveDirection *= isRunning ? moveSpeed * 2f : moveSpeed;
+            moveDirection *= moveSpeed;
             anim.SetFloat("Speed",1f);
         }
         else if (moveDirection == Vector3.zero)
@@ -93,9 +89,9 @@ public class CrashController : MonoBehaviour
     {
         // Réduire la vélocité horizontale pendant le saut en fonction de la vitesse de marche
         anim.SetTrigger("Jump");
-        float reducedSpeed = isRunning ? moveSpeed : moveSpeed * 0.1f;
-        velocity.x = moveDirection.x * reducedSpeed;
-        velocity.z = moveDirection.z * reducedSpeed;
+        //float reducedSpeed = isRunning ? moveSpeed : moveSpeed * 0.1f;
+        velocity.x = moveDirection.x * 0.5f;
+        velocity.z = moveDirection.z * 0.5f;
         lastTimeGrounded = Time.time;
         velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
     }
