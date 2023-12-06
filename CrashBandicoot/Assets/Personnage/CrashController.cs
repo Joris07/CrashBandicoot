@@ -66,10 +66,20 @@ public class CrashController : MonoBehaviour
         {
             anim.SetFloat("Speed", 0f);
         }
-
-        if (isGrounded && Time.time - lastTimeGrounded > jumpCooldown)
+        
+        
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            StartCoroutine(Attack());
+        }
+        else
+        {
+            anim.ResetTrigger("Attack");
+        }
+
+        if (isGrounded)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && Time.time - lastTimeGrounded > jumpCooldown)
             {
                 Jump();
             }
@@ -79,6 +89,7 @@ public class CrashController : MonoBehaviour
             anim.ResetTrigger("Jump");
         }
 
+        // anim.ResetTrigger("Attack");
         controller.Move(moveDirection * Time.deltaTime);
 
         velocity.y += gravity * Time.deltaTime;
@@ -94,5 +105,14 @@ public class CrashController : MonoBehaviour
         velocity.z = moveDirection.z * 0.5f;
         lastTimeGrounded = Time.time;
         velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+    }
+
+    private IEnumerator Attack()
+    {
+        anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 1);
+        anim.SetTrigger("Attack");
+
+        yield return new WaitForSeconds(0.9f);
+        anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
     }
 }
