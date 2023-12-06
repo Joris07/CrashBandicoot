@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
 	public GameObject cube;
+	[SerializeField] public GameObject apple;
 	public int maxCube;
 	public int maxHeight;
 	public void OnSpawn() {
@@ -19,13 +21,24 @@ public class ObstacleGenerator : MonoBehaviour
 			float posX = (float)Math.Round(UnityEngine.Random.Range(pos.x - 5, pos.x + 4)) + 0.5f;
 			float posZ = (float)Math.Round(UnityEngine.Random.Range(pos.z - 5, pos.z + 4)) + 0.5f;
 			Vector3 cubePosition = new Vector3(posX, 0.5f, posZ);
+			Vector3 applePos = new Vector3(posX, 0.5f, posZ);
+			GameObject appleInstantiated = Instantiate(apple, applePos, Quaternion.identity);
+			appleInstantiated.transform.parent = gameObject.transform;
 			//TODO: Il faudrait faire en sorte de regénérer une pos random mais flemme de faire un while ou autre pour le moment
-			if (!positions.Contains(cubePosition)) {
+			if (!positions.Contains(cubePosition) & !positions.Contains(applePos)) {
 				positions.Add(cubePosition);
 				GameObject cubeInstantiated = Instantiate(cube, cubePosition, Quaternion.identity);
 				cubeInstantiated.transform.parent = gameObject.transform;
 				AddHeight(cubePosition, 0);
 			}
+			// while (positions.Contains(cubePosition)) {
+			// 	float posiX = (float)Math.Round(UnityEngine.Random.Range(pos.x - 5, pos.x + 4)) + 0.5f;
+			// 	float posiZ = (float)Math.Round(UnityEngine.Random.Range(pos.z - 5, pos.z + 4)) + 0.5f;
+			// 	applePos = new Vector3(posiX, 0.5f, posiZ);
+			// }
+			// GameObject appleInstantiated = Instantiate(apple, applePos, Quaternion.identity);
+			// appleInstantiated.transform.parent = gameObject.transform;
+
 		}
 	}
 

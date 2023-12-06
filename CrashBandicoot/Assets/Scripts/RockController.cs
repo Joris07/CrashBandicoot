@@ -22,5 +22,8 @@ public class RockController : MonoBehaviour
 			Destroy(other.gameObject);
 			gameController.OnDeath();
 		}
+		if (other.gameObject.name == "Apple(Clone)") {
+			Destroy(other.gameObject);
+		}
 	}
 }

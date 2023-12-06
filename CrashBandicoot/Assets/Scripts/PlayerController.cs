@@ -31,11 +31,21 @@ public class PlayerController : MonoBehaviour
 	private void OnCollisionExit(Collision other) {
 		if (other.gameObject.tag == "Floor") {
 			canJump = false;
+			Debug.Log("APPLLLE");
 		}
 	}
 	private void OnCollisionEnter(Collision other) {
 		if (other.gameObject.tag == "Floor") {
 			canJump = true;
+			Debug.Log("APPLLLE");
+		}
+		if (other.gameObject.name == "Apple(Clone)") {
+			Debug.Log("APPLLLE");
+			other.transform.Translate(Vector3.up * speed * Time.deltaTime);
+			Destroy(other.gameObject, 1);
+		}
+		if (other.gameObject.name == "box_low(Clone)") {
+			Debug.Log("box");
 		}
 	}
 }
