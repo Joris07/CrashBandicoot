@@ -9,7 +9,7 @@ public class ObstacleGenerator : MonoBehaviour
 	public int maxHeight;
 	public void OnSpawn() {
 		//obliger de rajouter le UnityEngine devant tout les random.range sinon c'est ambigu avec le System.Random mais on a besoin de System pour le Math.round
-		int nbCube = UnityEngine.Random.Range(0, maxCube);
+		int nbCube = UnityEngine.Random.Range(10, maxCube);
 		List<Vector3> positions = new List<Vector3>();
 		for (int i = 0; i < nbCube; i++) {
 			
