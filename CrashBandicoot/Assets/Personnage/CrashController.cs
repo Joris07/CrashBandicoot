@@ -11,12 +11,14 @@ public class CrashController : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float jumpHeight;
     [SerializeField] public float jumpCooldown;
+    [SerializeField] private AudioClip attackSound;
 
     private Vector3 moveDirection;
     private Vector3 velocity;
 
     private CharacterController controller;
     private Animator anim;
+    private AudioSource audioSource;
 
     private float lastTimeGrounded;
     private bool isRotating;
@@ -26,6 +28,7 @@ public class CrashController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -50,12 +53,10 @@ public class CrashController : MonoBehaviour
 
         if (inputDirection != Vector3.zero)
         {
-            // Calculer la rotation pour faire face à la direction du déplacement
             Quaternion toRotation = Quaternion.LookRotation(inputDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * 8f);
         }
 
-        // Utiliser la direction avant du transform pour le déplacement
         Vector3 moveDirection = transform.forward * inputDirection.magnitude;
 
         if (moveDirection != Vector3.zero)
@@ -102,7 +103,6 @@ public class CrashController : MonoBehaviour
     {
         // Réduire la vélocité horizontale pendant le saut en fonction de la vitesse de marche
         anim.SetTrigger("Jump");
-        //float reducedSpeed = isRunning ? moveSpeed : moveSpeed * 0.1f;
         velocity.x = moveDirection.x * 0.5f;
         velocity.z = moveDirection.z * 0.5f;
         lastTimeGrounded = Time.time;
@@ -114,6 +114,11 @@ public class CrashController : MonoBehaviour
         isRotating = true;
         anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 1);
         anim.SetTrigger("Attack");
+
+        if (attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound);
+        }
 
         yield return new WaitForSeconds(0.9f);
         anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
@@ -129,9 +134,5 @@ public class CrashController : MonoBehaviour
             other.gameObject.GetComponent<MeshRenderer>().enabled = false;
             Destroy(other.gameObject, 1);
         }
-    }
-    private void DisableRotation()
-    {
-        isRotating = false;
     }
 }
