@@ -121,7 +121,7 @@ public class CrashController : MonoBehaviour
         int appleCount = 0;
         Vector3 x = new Vector3 (0,50,0);
 		if (other.gameObject.name == "Apple(Clone)") {
-            other.gameObject.GetComponent<Collider>().enabled = false;
+            other.gameObject.GetComponent<BoxCollider>().enabled = false;
             Debug.Log("Pomme !");
             other.gameObject.transform.Translate(x * 40 * 1);
             Destroy(other.gameObject, 1);
