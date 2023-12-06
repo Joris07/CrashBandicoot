@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObstacleGenerator : MonoBehaviour
 {
 	public GameObject cube;
+	[SerializeField] public GameObject apple;
 	public int maxCube;
 	public int maxHeight;
 	public void OnSpawn() {
@@ -18,7 +19,16 @@ public class ObstacleGenerator : MonoBehaviour
 			//on le met à 0.5 en hauteur parce que 0 il traverse le plane, et 1 il flotte
 			float posX = (float)Math.Round(UnityEngine.Random.Range(pos.x - 5, pos.x + 4)) + 0.5f;
 			float posZ = (float)Math.Round(UnityEngine.Random.Range(pos.z - 5, pos.z + 4)) + 0.5f;
+			Vector3 applePosition = new Vector3(posX, 0.5f, posZ);
 			Vector3 cubePosition = new Vector3(posX, 0.5f, posZ);
+			while (applePosition == cubePosition) {
+				float pos2X = (float)Math.Round(UnityEngine.Random.Range(pos.x - 5, pos.x + 4)) + 0.5f;
+				float pos2Z = (float)Math.Round(UnityEngine.Random.Range(pos.z - 5, pos.z + 4)) + 0.5f;
+				cubePosition = new Vector3(pos2X, 0.5f, pos2Z);
+			}
+			
+			GameObject appleInstantiated = Instantiate(apple, applePosition, Quaternion.identity);
+			appleInstantiated.transform.parent = gameObject.transform;
 			//TODO: Il faudrait faire en sorte de regénérer une pos random mais flemme de faire un while ou autre pour le moment
 			if (!positions.Contains(cubePosition)) {
 				positions.Add(cubePosition);

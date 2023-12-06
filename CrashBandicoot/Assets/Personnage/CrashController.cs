@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CrashController : MonoBehaviour
@@ -19,7 +20,6 @@ public class CrashController : MonoBehaviour
     private Animator anim;
 
     private float lastTimeGrounded;
-    private bool isRotating;
 
     // Start is called before the first frame update
     private void Start()
@@ -50,12 +50,12 @@ public class CrashController : MonoBehaviour
 
         if (inputDirection != Vector3.zero)
         {
-            // Calculer la rotation pour faire face à la direction du déplacement
+            // Calculer la rotation pour faire face ï¿½ la direction du dï¿½placement
             Quaternion toRotation = Quaternion.LookRotation(inputDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, Time.deltaTime * 8f);
         }
 
-        // Utiliser la direction avant du transform pour le déplacement
+        // Utiliser la direction avant du transform pour le dï¿½placement
         Vector3 moveDirection = transform.forward * inputDirection.magnitude;
 
         if (moveDirection != Vector3.zero)
@@ -75,7 +75,6 @@ public class CrashController : MonoBehaviour
         }
         else
         {
-            //Invoke("DisableRotation", 2f);
             anim.ResetTrigger("Attack");
         }
 
@@ -100,7 +99,7 @@ public class CrashController : MonoBehaviour
 
     private void Jump()
     {
-        // Réduire la vélocité horizontale pendant le saut en fonction de la vitesse de marche
+        // Rï¿½duire la vï¿½locitï¿½ horizontale pendant le saut en fonction de la vitesse de marche
         anim.SetTrigger("Jump");
         //float reducedSpeed = isRunning ? moveSpeed : moveSpeed * 0.1f;
         velocity.x = moveDirection.x * 0.5f;
@@ -111,27 +110,26 @@ public class CrashController : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        isRotating = true;
         anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 1);
         anim.SetTrigger("Attack");
 
         yield return new WaitForSeconds(0.9f);
         anim.SetLayerWeight(anim.GetLayerIndex("Attack Layer"), 0);
-        isRotating = false;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "box_low(Clone)" && isRotating)
-        {
+    private void OnCollisionEnter(Collision other) {
+        int appleCount = 0;
+        Vector3 x = new Vector3 (0,50,0);
+		if (other.gameObject.name == "Apple(Clone)") {
             other.gameObject.GetComponent<Collider>().enabled = false;
-            other.gameObject.GetComponent<ParticleSystem>().Play();
-            other.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            Debug.Log("Pomme !");
+            other.gameObject.transform.Translate(x * 40 * 1);
             Destroy(other.gameObject, 1);
-        }
-    }
-    private void DisableRotation()
-    {
-        isRotating = false;
-    }
+            appleCount++;
+			// audioSource.Play();
+			// other.gameObject.GetComponent<ParticleSystem>().Play();
+			// other.gameObject.GetComponent<MeshRenderer>().enabled = false;	
+			// Destroy(other.gameObject, 1);
+		}
+	}
 }
