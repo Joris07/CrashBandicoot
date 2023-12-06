@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 			transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.World);
 		}
 		//ne fonctionne pas (pas tester) penser à vérifier pour le saut infini
-		if (Input.GetKeyDown("space") && canJump) {
+		if (Input.GetKeyDown(KeyCode.Space) && canJump) {
 			GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
 		}
 	}
